@@ -6,43 +6,37 @@ cannot use additional data structures ?
 
 #include <iostream>
 #include <unordered_set>
+#include <stdbool.h>
 
 using namespace std;
 
-class Solution {
+class Ex01_array {
 public:
 	// Check if string is all unique
 	bool hasAllUnique(string& str) {
-		//  Corner Case
-		if (str.size() == 0) {
-			return false;
-		}
+		// Make a tracker array of 256 bools , each bit of this array is a character in ASCII table
+		bool tracker[UCHAR_MAX] = { 0 };
 
-		// Hashmap to store characters already seen
-		unordered_set<char> mData;
-
-		// Iterate through all chars
+		// Isolate a character from String
 		for (char ch : str) {
-			// Check if previously seen
-			// If Yes , them return false
-			if (mData.find(ch) != mData.end()) {
+			// See if character flag is set true in tracker , if yes , then return false
+			if (tracker[ch] == 1) {
 				return false;
 			}
-
 			else {
-				// If Not then add to set
-				mData.insert(ch);
+				// If not , then set it true
+				tracker[ch] = true;
 			}
 		}
-		return true;
+		return true;				// Return true by default
 	}
 };
 
-int main() {
-	Solution s;
-
-	string str = "";
-	cout << (s.hasAllUnique(str) ? "true" : "false");
-
-	return 0;
-}
+//int main() {
+//	Ex01_array solution;
+//
+//	string str = "Milind Singh";
+//	cout << (solution.hasAllUnique(str) ? "true" : "false");
+//
+//	return 0;
+//}

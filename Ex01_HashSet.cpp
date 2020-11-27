@@ -9,7 +9,7 @@ cannot use additional data structures ?
 
 using namespace std;
 
-class Solution {
+class Ex01_HashSet {
 public:
 	// Check if string is all unique
 	bool hasAllUnique(string& str) {
@@ -38,11 +38,11 @@ public:
 	}
 };
 
-int main() {
-	Solution s;
-
-	string str = "";
-	cout << (s.hasAllUnique(str) ? "true" : "false");
-
-	return 0;
-}
+//int main() {
+//	Solution s;
+//
+//	string str = "";
+//	cout << (s.hasAllUnique(str) ? "true" : "false");
+//
+//	return 0;
+//}
