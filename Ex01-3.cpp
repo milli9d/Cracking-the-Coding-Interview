@@ -1,7 +1,5 @@
 /*
-	1.1 Is Unique : Implement an algorithm to determine if a string has all unique characters.What if you
-cannot use additional data structures ?
-	Hints : #44, #7 77, #732
+	URLify
 	*/
 
 #include <iostream>
@@ -9,12 +7,12 @@ cannot use additional data structures ?
 
 using namespace std;
 
-class Ex01_HashSet {
+class Ex03 {
 public:
 	// Check if string is all unique
 	bool hasAllUnique(string& str) {
 		//  Corner Case
-		if (str.size() > 256) {
+		if (str.size() == 0) {
 			return false;
 		}
 
@@ -42,10 +40,6 @@ class Ex01_array {
 public:
 	// Check if string is all unique
 	bool hasAllUnique(string& str) {
-		if (str.size() > 256) {
-			return false;
-		}
-
 		// Make a tracker array of 256 bools , each bit of this array is a character in ASCII table
 		bool tracker[UCHAR_MAX] = { 0 };
 

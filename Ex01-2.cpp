@@ -59,13 +59,52 @@ public:
 	}
 };
 
-int main() {
-	Ex02_hash solution;
+class Ex02_array {
+public:
 
-	string str1 = "aab";
-	string str2 = "baa";
+	bool isPermutation(string& str1, string& str2) {
+		// Boundary Check
+		if (str1.size() != str2.size()) {
+			return false;
+		}
+
+		// Store characters of first string in array
+		int str1Map[UCHAR_MAX] = { 0 };
+
+		for (char ch : str1) {
+			str1Map[ch]++;
+		}
+
+		// Go through second string
+		for (auto ch : str2) {
+			// If char not found in map , return False
+			if (str1Map[ch] == 0) {
+				return false;
+			}
+			// If found then remove one count from map
+			else {
+				str1Map[ch]--;
+			}
+		}
+
+		// Check to see if all values in map have been removed , only then it is a permutaution
+		for (auto i : str1Map)
+		{
+			if (i != 0) {
+				return false;
+			}
+		}
+		return true;			// Return false by default
+	}
+};
+
+int main() {
+	Ex02_array solution;
+
+	string str1 = "aaas Milind";
+	string str2 = "asaa lindMi";
 
 	cout << (solution.isPermutation(str1, str2) ? "true" : "false");
-
+	cin.get();
 	return 0;
 }
