@@ -6,6 +6,7 @@ Hints: #7, #84, #722, #737
 
 #include <iostream>
 #include <unordered_set>
+#include <set>
 #include <stdbool.h>
 #include <algorithm>
 
@@ -28,18 +29,41 @@ public:
 
 class Ex02_hash {
 public:
-	bool isPermutation(string& str1, string& str2) {
-		//
 
-		return true;				// Return true by default
+	bool isPermutation(string& str1, string& str2) {
+		// Boundary Check
+		if (str1.size() != str2.size()) {
+			return false;
+		}
+
+		// Store characters of first string in hashmap
+		unordered_multiset<char> str1Map(str1.begin(), str1.end());
+
+		// Go through second string
+		for (auto ch : str2) {
+			// If char not found in map , return False
+			if (str1Map.find(ch) == str1Map.end()) {
+				return false;
+			}
+			// If found then remove one count from map
+			else {
+				str1Map.erase(str1Map.find(ch));
+			}
+		}
+
+		// Check to see if all values in map have been removed , only then it is a permutaution
+		if (str1Map.empty()) {
+			return true;
+		}
+		else return false;			// Return false by default
 	}
 };
 
 int main() {
 	Ex02_hash solution;
 
-	string str1 = "Milind Singh";
-	string str2 = "Singh   Milind";
+	string str1 = "aab";
+	string str2 = "baa";
 
 	cout << (solution.isPermutation(str1, str2) ? "true" : "false");
 
