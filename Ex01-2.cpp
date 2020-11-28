@@ -98,13 +98,13 @@ public:
 	}
 };
 
-int main() {
-	Ex02_array solution;
-
-	string str1 = "aaas Milind";
-	string str2 = "asaa lindMi";
-
-	cout << (solution.isPermutation(str1, str2) ? "true" : "false");
-	cin.get();
-	return 0;
-}
+//int main() {
+//	Ex02_array solution;
+//
+//	string str1 = "aaas Milind";
+//	string str2 = "asaa lindMi";
+//
+//	cout << (solution.isPermutation(str1, str2) ? "true" : "false");
+//	cin.get();
+//	return 0;
+//}

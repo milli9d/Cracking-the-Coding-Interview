@@ -10,59 +10,56 @@ using namespace std;
 class Ex03 {
 public:
 	// Check if string is all unique
-	bool hasAllUnique(string& str) {
+	bool URLify(string& str, int trueLen) {
+		int size = str.size();
+
 		//  Corner Case
-		if (str.size() == 0) {
+		if (size == 0) {
 			return false;
 		}
 
-		// Hashmap to store characters already seen
-		unordered_set<char> mData;
+		int countspc = 0;
 
-		// Iterate through all chars
-		for (char ch : str) {
-			// Check if previously seen
-			// If Yes , them return false
-			if (mData.find(ch) != mData.end()) {
-				return false;
+		// Count number of spaces
+		for (int i = 0; i < trueLen; i++) {
+			if (str[i] == ' ') {
+				countspc++;
 			}
+		}
 
+		// Check if enough space
+		if ((size - trueLen) < (countspc * 2)) {
+			return false;
+		}
+
+		// Start at end of string + spaces , last char in array
+		int idx = trueLen + (countspc * 2) - 1;
+
+		for (int i = trueLen - 1; i >= 0; i--) {
+			// Place %20 in-place of all spaces
+			if (str[i] == ' ') {
+				str[(size_t)idx - 0] = '0';
+				str[(size_t)idx - 1] = '2';
+				str[(size_t)idx - 2] = '%';
+				idx -= 3;
+			}
+			// Move curr char to end of array i.e. last idx position
 			else {
-				// If Not then add to set
-				mData.insert(ch);
+				str[idx] = str[i];
+				idx--;
 			}
 		}
 		return true;
 	}
 };
 
-class Ex01_array {
-public:
-	// Check if string is all unique
-	bool hasAllUnique(string& str) {
-		// Make a tracker array of 256 bools , each bit of this array is a character in ASCII table
-		bool tracker[UCHAR_MAX] = { 0 };
+int main() {
+	Ex03 s;
 
-		// Isolate a character from String
-		for (char ch : str) {
-			// See if character flag is set true in tracker , if yes , then return false
-			if (tracker[ch] == 1) {
-				return false;
-			}
-			else {
-				// If not , then set it true
-				tracker[ch] = true;
-			}
-		}
-		return true;				// Return true by default
-	}
-};
+	string str = "Milind is a fast coder   ";
+	int len = str.find_last_not_of(' ') + 1;
+	cout << (s.URLify(str, len) ? str : "Invalid Size") << endl;
 
-//int main() {
-//	Ex01_array s;
-//
-//	string str = "";
-//	cout << (s.hasAllUnique(str) ? "true" : "false");
-//
-//	return 0;
-//}
+	cin.get();
+	return 0;
+}
