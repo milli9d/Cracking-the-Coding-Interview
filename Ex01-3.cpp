@@ -53,13 +53,13 @@ public:
 	}
 };
 
-int main() {
-	Ex03 s;
-
-	string str = "Milind is a fast coder   ";
-	int len = str.find_last_not_of(' ') + 1;
-	cout << (s.URLify(str, len) ? str : "Invalid Size") << endl;
-
-	cin.get();
-	return 0;
-}
+//int main() {
+//	Ex03 s;
+//
+//	string str = "Milind is a fast coder   ";
+//	int len = str.find_last_not_of(' ') + 1;
+//	cout << (s.URLify(str, len) ? str : "Invalid Size") << endl;
+//
+//	cin.get();
+//	return 0;
+//}
