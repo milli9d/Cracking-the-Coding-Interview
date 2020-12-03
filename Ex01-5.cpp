@@ -77,13 +77,13 @@ public:
 	}
 };
 
-int main() {
-	Ex01_5 solution;
-
-	string str1 = "Milind Singh";
-	string str2 = "Milind Singh";
-
-	cout << (solution.isOneEditAway(str1, str2) ? "true" : "false");
-	cin.get();
-	return 0;
-}
+//int main() {
+//	Ex01_5 solution;
+//
+//	string str1 = "Milind Singh";
+//	string str2 = "Milind Singh";
+//
+//	cout << (solution.isOneEditAway(str1, str2) ? "true" : "false");
+//	cin.get();
+//	return 0;
+//}
