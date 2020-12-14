@@ -60,9 +60,9 @@ public:
 	}
 };
 
-int main() {
-	EX_01_8 Solution;
-	vector<vector<int>> mData = { {1,0,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,0} };
-
-	Solution.zeroMatrix(mData);
-}
+//int main() {
+//	EX_01_8 Solution;
+//	vector<vector<int>> mData = { {1,0,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,0} };
+//
+//	Solution.zeroMatrix(mData);
+//}
