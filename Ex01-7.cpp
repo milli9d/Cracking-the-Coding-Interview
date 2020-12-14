@@ -6,18 +6,78 @@
 */
 
 #include <iostream>
+#include <vector>
+
+using namespace std;
 
 class Ex_01_7 {
+private:
+	// Helper Pretty Printer
+	void prettyPrint(vector<vector<int>>& mData) {
+		for (vector<int> vec : mData) {
+			for (int i : vec) {
+				printf("%02d | ", i);
+			}
+			cout << endl;
+		}
+		cout << endl;
+	}
+
+	// Transpose a NxN matrix
+	void transposeMatrix(vector<vector<int>>& mData) {
+		int N = mData.size();
+
+		for (int i = 0; i < N; i++) {
+			for (int j = i + 1; j < N; j++) {
+				// Perform Swap
+				int temp = mData[i][j];
+				mData[i][j] = mData[j][i];
+				mData[j][i] = temp;
+			}
+		}
+	}
+
+	// Standard reverse array
+	void reverseVector(vector<int>& mData) {
+		int size = mData.size();
+		int half = size / 2;
+		for (int i = 0; i < half; i++) {
+			swap(mData[i], mData[size - 1 - i]);
+		}
+	}
+
 public:
-	void rotateMatrix(int* mData, int nCols, int nRows) {
+	// Rotate matrix by a certain degree , auto-reduced to 90 deg increments
+	void rotateMatrix(vector<vector<int>>& mData, uint32_t degree) {
+		prettyPrint(mData);
+		// Sanity Check
+		int rows = mData.size();
+		for (int i = 0; i < rows; i++) {
+			int cols = mData[i].size();
+			if (rows != cols) {
+				cout << "Not an NXN matrix!\n";
+				return;
+			}
+		}
+
+		int rotateCount = (degree / 90) % 4;
+
+		for (int j = 0; j < rotateCount; j++) {
+			transposeMatrix(mData);
+			for (int i = 0; i < rows; i++) {
+				reverseVector(mData[i]);
+			}
+		}
+		prettyPrint(mData);
 	}
 };
 
 //int main() {
 //	Ex_01_7 Solution;
-//	int mData = { 1,1,1,2,2,2,3,3,3,4,4,4 };
 //
-//	Solution.rotateMatrix(mData, 3, 3);
+//	vector<vector<int>> mData = { {1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16} };
+//
+//	Solution.rotateMatrix(mData, 270);
 //
 //	return 0;
 //}
