@@ -46,12 +46,12 @@ public:
 	}
 };
 
-int main(int argc, char** argv) {
-	EX_01_9 solution;
-	string str1 = "bottlewater";
-	string str2 = "erbottlewet";
-
-	cout << (solution.isStringRotation(str1, str2) ? "True" : "False");
-
-	return 0;
-}
+//int main(int argc, char** argv) {
+//	EX_01_9 solution;
+//	string str1 = "bottlewater";
+//	string str2 = "erbottlewat";
+//
+//	cout << (solution.isStringRotation(str1, str2) ? "True" : "False");
+//
+//	return 0;
+//}
