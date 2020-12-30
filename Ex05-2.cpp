@@ -25,6 +25,10 @@ public:
 		genVals();
 	}
 
+	~EX_05_02() {
+		valMap.clear();
+	}
+
 	void printBin(double val) {
 		// Sanity checks
 		if (val < 0 || val > 1) { return; }
@@ -61,8 +65,8 @@ public:
 	}
 };
 
-int main() {
-	EX_05_02 solution;
-	solution.printBin(0.625);
-	return 0;
-}
+//int main() {
+//	EX_05_02 solution;
+//	solution.printBin(0.5);
+//	return 0;
+//}
