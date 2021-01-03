@@ -76,11 +76,11 @@ public:
 	}
 };
 
-int main() {
-	Ex_05_6 solution;
-	cout << solution.editsToNumber(1, 15) << endl;
-	cout << solution.editsToNumberXOR(1, 15) << endl;
-	cout << solution.editsToNumberXOR2(1, 15) << endl;
-	cout << solution.editsToNumberXOR3(1, 15) << endl;
-	return 0;
-}
+//int main() {
+//	Ex_05_6 solution;
+//	cout << solution.editsToNumber(1, 15) << endl;
+//	cout << solution.editsToNumberXOR(1, 15) << endl;
+//	cout << solution.editsToNumberXOR2(1, 15) << endl;
+//	cout << solution.editsToNumberXOR3(1, 15) << endl;
+//	return 0;
+//}
