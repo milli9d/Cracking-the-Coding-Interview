@@ -32,9 +32,8 @@ public:
 	}
 };
 
-int main() {
-	EX_05_7 solution;
-	solution.reverseViaSwap(0x0000'0005);
-
-	return 0;
-}
+//int main() {
+//	EX_05_7 solution;
+//	solution.reverseViaSwap(0x0000'0005);
+//	return 0;
+//}
