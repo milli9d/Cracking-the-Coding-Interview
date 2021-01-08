@@ -32,7 +32,7 @@ public:
 		}
 
 		// Get next largest number
-		bitset<SIZE> nextLarge = bitset<SIZE>(pow(2, count) - 1) << (SIZE - count);					// 1110 not 0111
+		bitset<SIZE> nextLarge = bitset<SIZE>((1 << count) - 1) << (SIZE - count);					// 1110 not 0111
 
 		// Get next smallest number
 		bitset<SIZE> nextSmall = numbitset.to_ulong();

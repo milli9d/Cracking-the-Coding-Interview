@@ -30,6 +30,10 @@ private:
 	}
 
 public:
+
+	// Draw line on a screen stored as a matrix in 1-D Array
+	// x = 0 (left)
+	// y = 0 (bottom)
 	void drawLine(unsigned char* screen, const uint32_t size, const uint32_t width, const uint32_t x1, const uint32_t x2, const uint32_t y) {
 		// Find the height
 		uint32_t height = size / width;
@@ -65,10 +69,10 @@ public:
 		{
 			screen[i + heightIdx] = 0xFF;
 		}
-
 		// Fill Last Byte
 		screen[lastByteIdx + heightIdx] = makeCharMask(lastByteSplitIdx);
 		changeCharEndianness(screen[lastByteIdx + heightIdx]);
+
 		return;
 	}
 
@@ -84,13 +88,13 @@ public:
 	}
 };
 
-int main() {
-	EX_05_8 solution;
-	unsigned char TFT[TFT_WIDTH * TFT_HEIGHT] = { 0 };
-	uint32_t size = TFT_WIDTH * TFT_HEIGHT;
-
-	solution.drawLine(TFT, size, TFT_WIDTH, 4, 35, 0);
-	solution.printScreen(TFT, TFT_WIDTH, TFT_HEIGHT);
-
-	return 0;
-}
+//int main() {
+//	EX_05_8 solution;
+//	unsigned char TFT[TFT_WIDTH * TFT_HEIGHT] = { 0 };
+//	uint32_t size = TFT_WIDTH * TFT_HEIGHT;
+//
+//	solution.drawLine(TFT, size, TFT_WIDTH, 22, 40, 20);
+//	solution.printScreen(TFT, TFT_WIDTH, TFT_HEIGHT);
+//
+//	return 0;
+//}
