@@ -19,8 +19,28 @@ private:
 
 public:
 	EX_02_01() {
-		mData.generateRandom(30, 10);
+		mData.generateRandom(30, 3);
 		mData.printList();
+	}
+
+	void removeDupsNoMem() {
+		LinkedList<int>::ListNode* runPtr = mData.getHead();
+		while (runPtr != NULL) {
+			LinkedList<int>::ListNode* copyPtr = runPtr;
+			LinkedList<int>::ListNode* searchPtr = runPtr->next;
+			LinkedList<int>::ListNode* delPtr = searchPtr;
+			while (searchPtr != NULL) {
+				if (searchPtr != NULL && searchPtr->val == runPtr->val) {
+					delPtr = searchPtr;
+					searchPtr = searchPtr->next;
+					delete(delPtr);
+				}
+				else {
+					searchPtr = searchPtr->next;
+				}
+			}
+			runPtr = copyPtr->next;
+		}
 	}
 
 	/*
@@ -51,6 +71,7 @@ public:
 
 //int main() {
 //	EX_02_01 solution;
-//	solution.removeDups();
+//	//solution.removeDups();
+//	solution.removeDupsNoMem();
 //	return 0;
 //}

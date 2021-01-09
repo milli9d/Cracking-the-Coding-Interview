@@ -13,7 +13,7 @@ using std::string;
 template<typename T>
 class LinkedList {
 public:
-	struct ListNode {
+	typedef struct ListNode {
 		T val;
 		ListNode* next;
 
