@@ -24,23 +24,27 @@ public:
 	}
 
 	void removeDupsNoMem() {
-		LinkedList<int>::ListNode* runPtr = mData.getHead();
+		struct LinkedList<int>::ListNode* runPtr = mData.getHead();
+
+		// Traverse the list , pick one element
 		while (runPtr != NULL) {
-			LinkedList<int>::ListNode* copyPtr = runPtr;
-			LinkedList<int>::ListNode* searchPtr = runPtr->next;
-			LinkedList<int>::ListNode* delPtr = searchPtr;
+			// Traverse the list from here to end , start search from next element
+			struct LinkedList<int>::ListNode* searchPtr = runPtr->next;
 			while (searchPtr != NULL) {
-				if (searchPtr != NULL && searchPtr->val == runPtr->val) {
-					delPtr = searchPtr;
+				if (searchPtr->val == runPtr->val) {
+					// Copy pointer to counter pointer invalidation
+					struct LinkedList<int>::ListNode* delPtr = searchPtr;
 					searchPtr = searchPtr->next;
-					delete(delPtr);
+					mData.deleteNode(delPtr);
 				}
 				else {
 					searchPtr = searchPtr->next;
 				}
 			}
-			runPtr = copyPtr->next;
+			runPtr = runPtr->next;
 		}
+		// Check Output
+		mData.printList();
 	}
 
 	/*
@@ -54,6 +58,7 @@ public:
 		// Look for element value in Hash Set , if you find it then delete it from list
 		while (runPtr != NULL)
 		{
+			// If found in tracker then delete the node : O(n) time
 			if (tracker.find(runPtr->val) != tracker.end()) {
 				delPtr = runPtr;
 				runPtr = runPtr->next;
@@ -71,7 +76,8 @@ public:
 
 //int main() {
 //	EX_02_01 solution;
-//	//solution.removeDups();
-//	solution.removeDupsNoMem();
+//	solution.removeDups();
+//	EX_02_01 solution1;
+//	solution1.removeDupsNoMem();
 //	return 0;
 //}
