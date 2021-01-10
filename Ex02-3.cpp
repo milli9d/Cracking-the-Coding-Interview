@@ -62,18 +62,18 @@ private:
 	LinkedList<T>* mData = nullptr;
 };
 
-int main() {
-	LinkedList<int> mData;
-	mData.generateRandom(LIST_SIZE, LIST_MOD);
-	mData.printList();
-
-	EX_02_3<int> solution(&mData);
-	solution.deleteMiddleNode2(mData.getNode(9));
-	mData.printList();
-	solution.deleteMiddleNode2(mData.getNode(0));
-	mData.printList();
-	solution.deleteMiddleNode2(mData.getNode(7));
-	mData.printList();
-
-	return 0;
-}
+//int main() {
+//	LinkedList<int> mData;
+//	mData.generateRandom(LIST_SIZE, LIST_MOD);
+//	mData.printList();
+//
+//	EX_02_3<int> solution(&mData);
+//	solution.deleteMiddleNode2(mData.getNode(9));
+//	mData.printList();
+//	solution.deleteMiddleNode2(mData.getNode(0));
+//	mData.printList();
+//	solution.deleteMiddleNode2(mData.getNode(7));
+//	mData.printList();
+//
+//	return 0;
+//}

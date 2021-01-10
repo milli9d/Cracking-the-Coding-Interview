@@ -26,6 +26,34 @@ public:
 	LinkedList() : size(-1), head(nullptr) {
 	}
 
+	// Copy Constructor - Deep Copy
+	LinkedList(const LinkedList<T>& obj) : size(-1), head(nullptr) {
+		LinkedList<T>::ListNode* runPtr = obj.head;
+		printf("Copied\n");
+		while (runPtr != NULL) {
+			append(runPtr->val);
+			runPtr = runPtr->next;
+		}
+	}
+
+	// Move Constructor - Shallow Copy , take ownership
+	LinkedList(LinkedList<T>&& obj) : size(-1), head(nullptr) {
+		printf("Moved\n");
+		this->head = obj.head;
+		this->size = obj.size;
+		obj.head = nullptr;
+		obj.size = 0;
+	}
+
+	~LinkedList() {
+		LinkedList<T>::ListNode* runPtr = head;
+		while (runPtr != NULL) {
+			ListNode* delPtr = runPtr;
+			runPtr = runPtr->next;
+			delete(delPtr);
+		}
+	}
+
 	void generateRandom(size_t count, int limit) {
 		srand(time(0));
 		while (count-- > 0) {
@@ -150,7 +178,7 @@ public:
 	}
 
 private:
-	size_t size = 0;
+	size_t size = -1;
 	LinkedList<T>::ListNode* head = nullptr;
 };
 
