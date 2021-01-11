@@ -159,10 +159,6 @@ public:
 		cout << endl;
 	}
 
-	ListNode* getHead() {
-		return head;
-	}
-
 	ListNode* getNode(size_t idx) {
 		if (idx <= size) {
 			ListNode* ptr = head;
@@ -173,6 +169,9 @@ public:
 		}
 	}
 
+	ListNode* getHead() {
+		return head;
+	}
 	size_t getSize() {
 		return size;
 	}
