@@ -6,35 +6,137 @@
 	4. Quick Sort
 
 */
-
+#pragma once
 #include <iostream>
 #include <vector>
 
 using intVector = std::vector<int>;
+using std::cout;
+using std::endl;
+
+#define INPUT_SIZE 20
+#define INPUT_MOD 100
 
 class Sorter {
-private:
-	void merge() {
-	}
-
-	void mergeSort() {
-	}
-
 public:
 	/*
-		Merge sort is an recursive algorithm
-		divide the array into 2 halves
-		sort the halves , merge them back
+		Merge sort is an recursive algorithm, divide the array into 2 halves, sort the halves , merge them back
+		O(nlog(n)) time O(n) space
 	*/
-	void mergeSort(intVector& arr) {
+	static void mergeSort(intVector& arr) {
+		mergeSorter::mergeSort(arr, 0, arr.size() - 1);
 	}
 
+	static void quickSort(intVector& arr) {
+		quickSorter::quickSort(arr, 0, arr.size() - 1);
+	}
+
+private:
+	// Helper class for Merge Sort
+	class mergeSorter {
+	public:
+		// Merge two psuedo-arrays in ascending order
+		static void merge(intVector& arr, size_t low, size_t high, size_t mid) {
+			// Helper Storage
+			intVector out;
+			out.resize(high - low + 1);
+
+			// Two-Pointer Technique
+			size_t first = low;
+			size_t second = mid + 1;
+
+			// Choose smallest element and put in output array , similiar to bubble sort
+			int outIdx = 0;
+			while (first <= mid && second <= high) {
+				// Find which is smaller ,  put it in the output array
+				if (arr[first] < arr[second]) {
+					out[outIdx++] = arr[first++];
+				}
+
+				else if (arr[first] > arr[second]) {
+					out[outIdx++] = arr[second++];
+				}
+
+				else if (arr[first] == arr[second]) {
+					out[outIdx++] = arr[first++];
+					out[outIdx++] = arr[second++];
+				}
+			}
+
+			// If any of the sub-array pointers has not reached the end , copy the leftover elements from the sub-array
+			while (first <= mid) {
+				out[outIdx++] = arr[first++];
+			}
+
+			// If any of the sub-array pointers has not reached the end , copy the leftover elements from the sub-array
+			while (second <= high) {
+				out[outIdx++] = arr[second++];
+			}
+
+			// Copy into original array
+			for (int i = low; i <= high; i++) {
+				arr[i] = out[i - low];
+			}
+			return;
+		}
+
+		static void mergeSort(intVector& arr, size_t low, size_t high) {
+			if (low < high) {
+				int mid = (low + high) / 2;
+				//cout << low << "  " << mid << "  " << high << "  " << endl;
+				mergeSort(arr, low, mid);
+				mergeSort(arr, mid + 1, high);
+				merge(arr, low, high, mid);
+			}
+			return;
+		}
+	};
+
+	class quickSorter {
+	public:
+		static void quickSort(intVector& arr, int left, int right) {
+			int index = partition(arr, left, right);
+			// quicksort left partition
+			if (left < index - 1) {
+				quickSort(arr, left, index - 1);
+			}
+			// quicksort right partition
+			if (index < right) {
+				quickSort(arr, index, right);
+			}
+		}
+
+		// Partition the subarrays such that all elements smaller to pivot are on left and all larger on right
+		static int partition(intVector& arr, int left, int right) {
+			int pivot = arr[(left + right) / 2];
+			while (left <= right) {
+				// Find element on left , which needs to be on right
+				while (arr[left] < pivot) {
+					left++;
+				}
+				// Find element on right , which needs to be on left
+				while (arr[right] > pivot) {
+					right--;
+				}
+
+				// Swap the found elements
+				if (left <= right) {
+					std::swap(arr[left], arr[right]);
+					left++;
+					right--;
+				}
+			}
+			return left;
+		}
+	};
+
+public:
 	/*
 		Bubble sort uses small bubbles of 2 elements (i.e consecutive pairs) , it rearranges (swaps) the pair to be in ascending order.
 		We do this enough iterations we get a sorted array , over time smaller elements bubble up to the beginning
 		O(n^2) time , O(1) space
 	*/
-	void bubbleSort(intVector& arr) {
+	static void bubbleSort(intVector& arr) {
 		size_t size = arr.size();
 		// Run nested loop , number of times the size of the array ,
 		// this effectively means that we atleast touch every element (the number of times it takes to bubble up to the begining).
@@ -60,7 +162,7 @@ public:
 		The size of the array is how many iterations are performed to ensure all elements are in place.
 		O(n^2) time and O(1) space
 	*/
-	void selectionSort(intVector& arr) {
+	static void selectionSort(intVector& arr) {
 		// Size for saving time
 		size_t size = arr.size();
 
@@ -81,9 +183,9 @@ public:
 	/*
 		Helper function to print array
 	*/
-	void printArr(const intVector& arr) {
+	static void printArr(const intVector& arr) {
 		for (int i : arr) {
-			printf("%d | ");
+			printf("%2d | ");
 		}
 		printf("\n");
 	}
@@ -91,55 +193,39 @@ public:
 	/*
 		Helper function to generate random arrays
 	*/
-	void generateRandom(intVector& arr, size_t count, int mod) {
+	static void generateRandom(intVector& arr, size_t count, int mod) {
 		srand(time(0));
 		for (int i = 0; i < count; i++) {
 			arr.push_back(rand() % mod);
 		}
 	}
-
-private:
 };
 
-int main() {
-	Sorter solution;
+void demo(void (*myfun)(intVector& arr)) {
 	intVector test;
-
-	{
-		printf("\nBubble Sort.\n");
-		test.clear();
-		solution.generateRandom(test, 20, 50);
-		printf("Input.\n");
-		solution.printArr(test);
-
-		solution.bubbleSort(test);
-		printf("Output.\n");
-		solution.printArr(test);
-	}
-
-	{
-		printf("\nSelection Sort.\n");
-		test.clear();
-		solution.generateRandom(test, 20, 30);
-		printf("Input.\n");
-		solution.printArr(test);
-
-		solution.selectionSort(test);
-		printf("Output.\n");
-		solution.printArr(test);
-	}
-
-	{
-		printf("\nMerge Sort.\n");
-		test.clear();
-		solution.generateRandom(test, 20, 10);
-		printf("Input.\n");
-		solution.printArr(test);
-
-		solution.mergeSort(test);
-		printf("Output.\n");
-		solution.printArr(test);
-	}
-
-	return 0;
+	test.clear();
+	Sorter::generateRandom(test, INPUT_SIZE, INPUT_MOD);
+	printf("Input.\n");
+	Sorter::printArr(test);
+	myfun(test);
+	printf("Output.\n");
+	Sorter::printArr(test);
 }
+
+//int main() {
+//	Sorter solution;
+//
+//	printf("\nBubble Sort.\n");
+//	demo(&Sorter::bubbleSort);
+//
+//	printf("\nSelection Sort.\n");
+//	demo(&Sorter::selectionSort);
+//
+//	printf("\nMerge Sort.\n");
+//	demo(&Sorter::mergeSort);
+//
+//	printf("\nQuick Sort.\n");
+//	demo(&Sorter::quickSort);
+//
+//	return 0;
+//}
