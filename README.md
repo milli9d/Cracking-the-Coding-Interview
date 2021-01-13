@@ -2,10 +2,10 @@
 ### C++ 17
 Updated regularly with more solutions
 
-####Currently Complete 
+#### Currently Complete 
 1. Arrays
 5. Bit Manipulation
 
-####In Attempt:
+#### In Attempt:
 2. Linked Lists
 8. Dynamic Programming
