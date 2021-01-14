@@ -95,10 +95,11 @@ public:
 
 	~LinkedList() {
 		LinkedList<T>::ListNode* runPtr = head;
-		while (runPtr != NULL) {
+		while (runPtr != nullptr) {
 			ListNode* delPtr = runPtr;
 			runPtr = runPtr->next;
 			delete(delPtr);
+			delPtr = nullptr;
 		}
 		//printf("DELETED\n");
 	}
@@ -151,6 +152,24 @@ public:
 		reverse(head, NULL);
 	}
 
+	void append(LinkedList<T>::ListNode* ptr) {
+		// If head is not initialized yet , set head to new node
+		if (head == nullptr) {
+			head = ptr;
+		}
+		else
+		{
+			// Traverse to end of list
+			LinkedListIterator runPtr = this->begin();
+			while (runPtr->next != NULL) {
+				runPtr++;
+			}
+			// Add temp node to list's end
+			runPtr->next = ptr;
+		}
+		size++;
+	}
+
 	/*
 		Append to the end of the list
 	*/
@@ -173,6 +192,16 @@ public:
 			ptr->next = temp;
 		}
 		size++;
+	}
+
+	void append(LinkedList<T>& list) {
+		LinkedListIterator ptr = list.begin();
+		while (ptr != list.end()) {
+			LinkedListIterator store = ptr;
+			ptr++;
+			store->next = NULL;
+			append(&(*store));
+		}
 	}
 
 	void deleteNode(ListNode* deleteMe) {
@@ -240,10 +269,8 @@ public:
 		Pretty Print the list
 	*/
 	void printList() {
-		auto* ptr = head;
-		while (ptr != NULL) {
-			cout << "->" << ptr->val;
-			ptr = ptr->next;
+		for (auto i : *this) {
+			cout << i.val << "->";
 		}
 		cout << endl;
 	}

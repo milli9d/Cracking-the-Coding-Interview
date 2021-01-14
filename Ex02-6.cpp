@@ -18,6 +18,7 @@ public:
 	EX_02_06() {
 	}
 
+	// Using Extra Storage
 	template<typename T>
 	static bool isPalindromeList(LinkedList<T>& list) {
 		// Get number of elements
@@ -43,7 +44,23 @@ public:
 			runPtr++;
 			track.pop();
 		}
+		return true;
+	}
 
+	// Using Reverse List O(n) time
+	template<typename T>
+	static bool isPalindromeList2(LinkedList<T>& list) {
+		// Make a copy list
+		LinkedList<T> reverseList = list;
+		// Reverse the copy
+		reverseList.reverse();
+
+		LinkedList<T>::Iterator listItr = list.begin();
+		LinkedList<T>::Iterator reverseListItr = reverseList.begin();
+		// Compare the copies , if mismatch then throw false
+		while (listItr != list.end() && reverseListItr != reverseList.end()) {
+			if ((listItr++)->val != (reverseListItr++)->val) { return false; }
+		}
 		return true;
 	}
 };
@@ -53,13 +70,12 @@ public:
 //	pal.append("Hello");
 //	pal.append("HI");
 //	pal.append("Bye");
-//	pal.append("Bye");
 //	pal.append("HI");
 //	pal.append("Hello");
-//
 //	pal.printList();
 //
-//	cout << (EX_02_06::isPalindromeList<string>(pal) ? "True" : "False");
+//	cout << (EX_02_06::isPalindromeList<string>(pal) ? "True" : "False") << endl;
+//	cout << (EX_02_06::isPalindromeList2<string>(pal) ? "True" : "False") << endl;
 //
 //	return 0;
 //}
