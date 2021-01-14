@@ -21,15 +21,63 @@ public:
 			this->val = val;
 			this->next = nullptr;
 		}
+	}ListNode;
+
+	class LinkedListIterator {
+	public:
+		LinkedListIterator(ListNode* ptr) : m_ptr(ptr) {}
+
+		~LinkedListIterator() {}
+		// Prefix
+		LinkedListIterator& operator++() {
+			m_ptr = m_ptr->next;
+			return *this;
+		}
+		// Postfix
+		LinkedListIterator& operator++(int) {
+			LinkedListIterator iterator = *this;
+			++(*this);
+			return iterator;
+		}
+
+		ListNode& operator[](int index) {
+			ListNode& ptr = head;
+			while (index-- > 0) {
+				ptr = ptr.next;
+			}
+			return ptr;
+		}
+
+		ListNode* operator->() {
+			return m_ptr;
+		}
+
+		ListNode& operator*() {
+			return *m_ptr;
+		}
+
+		bool operator==(const LinkedListIterator& other) const {
+			return m_ptr == other.m_ptr;
+		}
+
+		bool operator!=(const LinkedListIterator& other) const {
+			return !(m_ptr == other.m_ptr);
+		}
+
+	private:
+		ListNode* m_ptr = nullptr;
 	};
 
+	using Iterator = LinkedListIterator;
+
+	// Default Constructor
 	LinkedList() : size(-1), head(nullptr) {
 	}
 
 	// Copy Constructor - Deep Copy
 	LinkedList(const LinkedList<T>& obj) : size(-1), head(nullptr) {
 		LinkedList<T>::ListNode* runPtr = obj.head;
-		printf("Copied\n");
+		//printf("Copied\n");
 		while (runPtr != NULL) {
 			append(runPtr->val);
 			runPtr = runPtr->next;
@@ -38,7 +86,7 @@ public:
 
 	// Move Constructor - Shallow Copy , take ownership
 	LinkedList(LinkedList<T>&& obj) : size(-1), head(nullptr) {
-		printf("Moved\n");
+		//printf("Moved\n");
 		this->head = obj.head;
 		this->size = obj.size;
 		obj.head = nullptr;
@@ -52,6 +100,16 @@ public:
 			runPtr = runPtr->next;
 			delete(delPtr);
 		}
+		//printf("DELETED\n");
+	}
+
+	Iterator begin() {
+		return LinkedListIterator(head);
+	}
+
+	//TODO
+	Iterator end() {
+		return nullptr;
 	}
 
 	void generateRandom(size_t count, int limit) {
@@ -60,6 +118,37 @@ public:
 			int val = rand() % limit;
 			append(val);
 		}
+	}
+private:
+	void reverse(ListNode* curr, ListNode* prev) {
+		// Terminating Case
+		if (curr == NULL)
+		{
+			return;
+		}
+		// if at end , mark it head
+		if (curr->next == NULL) {
+			this->head = curr;
+			curr->next = prev;
+			return;
+		}
+		// Save for recursive call
+		ListNode* next = curr->next;
+
+		// Do a pointer flip
+		curr->next = prev;
+
+		// Continue recursive calls
+		reverse(next, curr);
+	}
+public:
+	// Interface to reverse the Linked List
+	void reverse() {
+		// Sanity Check
+		if (head == nullptr) {
+			return;
+		}
+		reverse(head, NULL);
 	}
 
 	/*

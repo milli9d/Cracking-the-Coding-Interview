@@ -31,6 +31,8 @@ public:
 		quickSorter::quickSort(arr, 0, arr.size() - 1);
 	}
 
+	Sorter() = delete;
+
 private:
 	// Helper class for Merge Sort
 	class mergeSorter {
@@ -213,8 +215,6 @@ void demo(void (*myfun)(intVector& arr)) {
 }
 
 //int main() {
-//	Sorter solution;
-//
 //	printf("\nBubble Sort.\n");
 //	demo(&Sorter::bubbleSort);
 //

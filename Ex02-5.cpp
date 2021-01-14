@@ -24,46 +24,113 @@ using std::vector;
 #define LIST_MOD 10
 
 class EX_02_5 {
+private:
+	// Helper code to pad lists with zeroes for unequal lists
+	static void padLists(LinkedList<int>& num1, LinkedList<int>& num2) {
+		int sizeList1 = 0;
+		int sizeList2 = 0;
+		LinkedList<int>::Iterator first(num1.getHead());
+		LinkedList<int>::Iterator second(num2.getHead());
+		// Count elements in both lists
+		while (first != NULL && second != NULL) {
+			first++;
+			sizeList1++;
+			second++;
+			sizeList2++;
+		}
+		// Complete count if any elements left
+		while (first != NULL) {
+			first++;
+			sizeList1++;
+		}
+		while (second != NULL) {
+			second++;
+			sizeList2++;
+		}
+		// Pad zeroes on the shorter list
+		LinkedList<int>& padList = (sizeList1 < sizeList2) ? num1 : num2;
+		int count = abs(sizeList1 - sizeList2);
+		while (count-- > 0) {
+			padList.append(0);
+		}
+	}
+
 public:
+	/*
+		Sum signed integer in a linked list stored in Forward order
+	*/
+	static LinkedList<int>* sumListForward(LinkedList<int>* num1, LinkedList<int>* num2) {
+		// Reverse the Linked Lists
+		LinkedList<int> temp1 = *num1;
+		LinkedList<int> temp2 = *num2;
+		temp1.reverse();
+		temp2.reverse();
+		LinkedList<int>* out = sumListReverse(&temp1, &temp2);
+		out->reverse();
+		return out;
+	}
 
 	/*
-			3->1->2   + 1->2->3  =  213 + 321 = 534
+		Sum signed integer in a linked list stored in reverse order
 	*/
-	LinkedList<int>* sumList(LinkedList<int>* num1, LinkedList<int>* num2) {
+	static LinkedList<int>* sumListReverse(LinkedList<int>* num1, LinkedList<int>* num2) {
 		LinkedList<int>* output = new LinkedList<int>();
-		LinkedList<int>::ListNode* runPtr1 = num1->getHead();
-		LinkedList<int>::ListNode* runPtr2 = num2->getHead();
-		num1->printList();
-		num2->printList();
-		int prevCarry = 0;
-		while (runPtr1 != NULL && runPtr2 != NULL) {
-			int sum = runPtr1->val + runPtr2->val;
-			int carry = sum / 10;
-			int val = sum % 10;
-			// If carry
-			output->append(val + prevCarry);
+		// Pad Lists if they are unequal
+		padLists(*num1, *num2);
 
+		printf("\n");
+
+		LinkedList<int>::Iterator first(num1->getHead());
+		LinkedList<int>::Iterator second(num2->getHead());
+
+		int prevCarry = 0;
+		while (first != NULL && second != NULL) {
+			// Calculate total and isolate carry and sum
+			int total = first->val + second->val;
+			int carry = total / 10;
+			int sum = total % 10;
+
+			// Re-use storage for total to be added to list
+			total = sum + prevCarry;
+
+			// Previous Carry Check, if total exceeds 9 that means there is additional carry to be forwarded
+			if (total > 9) {
+				// Forward by adding to current cycle carry
+				carry += total / 10;
+				// New total becomes units place of the result
+				total = total % 10;
+			}
+
+			// Insert in new Linked List
+			output->append(total);
+
+			// Move Pointers
+			first++;
+			second++;
 			prevCarry = carry;
-			runPtr1 = runPtr1->next;
-			runPtr2 = runPtr2->next;
 		}
-		output->printList();
+
+		if (prevCarry != 0) {
+			output->append(prevCarry);
+		}
+
 		return output;
 	}
 };
 
 //int main() {
 //	LinkedList<int> num1;
-//	num1.append(8);
-//	num1.append(2);
-//	num1.append(5);
+//	num1.generateRandom(10, 5);
+//	num1.printList();
 //	LinkedList<int> num2;
-//	num2.append(4);
-//	num2.append(5);
-//	num2.append(6);
+//	num2.generateRandom(5, 10);
+//	num2.printList();
 //
-//	EX_02_5 solution;
-//	solution.sumList(&num1, &num2);
+//	LinkedList<int>* test = EX_02_5::sumListForward(&num1, &num2);
+//	test->printList();
+//	//LinkedList<int>* test1 = EX_02_5::sumListReverse(&num1, &num2);
+//	//test1->printList();
+//	//delete(test1);
 //
 //	return 0;
 //}
