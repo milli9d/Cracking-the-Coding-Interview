@@ -65,7 +65,7 @@ public:
 		}
 
 	private:
-		ListNode* m_ptr = nullptr;
+		LinkedList<T>::ListNode* m_ptr = nullptr;
 	};
 
 	using Iterator = LinkedListIterator;
@@ -95,6 +95,7 @@ public:
 
 	~LinkedList() {
 		LinkedList<T>::ListNode* runPtr = head;
+		head = NULL;
 		while (runPtr != nullptr) {
 			ListNode* delPtr = runPtr;
 			runPtr = runPtr->next;
