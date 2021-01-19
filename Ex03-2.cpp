@@ -50,27 +50,27 @@ private:
 	int min = INT32_MAX;
 };
 
-int main() {
-	EX_03_02<10> test;
-
-	test.push(23);
-	test.push(15);
-	test.push(1);
-	test.push(3);
-	test.push(10);
-	int a = test.MIN();
-	assert(a == 1);
-	test.pop();
-	test.pop();
-	test.pop();
-	a = test.MIN();
-	assert(a == 15);
-	test.push(23);
-	a = test.MIN();
-	test.push(-10);
-	a = test.MIN();
-	test.push(12);
-	test.pop();
-	a = test.MIN();
-	return 0;
-}
+//int main() {
+//	EX_03_02<10> test;
+//
+//	test.push(23);
+//	test.push(15);
+//	test.push(1);
+//	test.push(3);
+//	test.push(10);
+//	int a = test.MIN();
+//	assert(a == 1);
+//	test.pop();
+//	test.pop();
+//	test.pop();
+//	a = test.MIN();
+//	assert(a == 15);
+//	test.push(23);
+//	a = test.MIN();
+//	test.push(-10);
+//	a = test.MIN();
+//	test.push(12);
+//	test.pop();
+//	a = test.MIN();
+//	return 0;
+//}
