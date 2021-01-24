@@ -24,6 +24,8 @@ public:
 	enum AnimalNames {
 		CAT, DOG, ANIMAL
 	};
+
+	//Inner Classes
 private:
 	// Base Animal Class
 	class Animal {
@@ -31,38 +33,36 @@ private:
 		AnimalNames name = ANIMAL;
 		int order = -1;
 	public:
+		// Deleted Default Constructor
 		Animal() = delete;
-
+		// Constructor to put animal name
 		Animal(enum AnimalNames sname) :name(sname) {}
-
-		AnimalNames whoAmI() {
-			return name;
-		}
-
-		int getOrder() {
-			return order;
-		}
-
+		int getOrder() { return order; }
 		void setOrder(int o) { order = o; }
 	};
 
-	// Derived Classes
+	// Derived Class
 	class Cat : public Animal {
 	public:
 		// Default Constructor
 		Cat() :Animal(CAT) {}
 	};
+	// Derived Class
 	class Dog : public Animal {
 	public:
 		// Default Constructor
 		Dog() :Animal(DOG) {}
 	};
-	//
+
+	// Storage Members
 private:
 	Queue<Dog> dogQueue;
 	Queue<Cat> catQueue;
 	int order = -1;
+
+	// Member Functions
 public:
+	// Defualt Constructor
 	EX_03_6() : order(-1) {}
 
 	// Enqueue an animal
@@ -79,23 +79,20 @@ public:
 		}
 	}
 
+	// Dequeue a Dog
 	void dequeueDog() {
 		if (!dogQueue.empty()) {
 			dogQueue.pop();
 		}
-		else {
-			printf("No More Dogs!\n");
-		}
+		else { printf("No More Dogs!\n"); }
 	}
 
+	// Dequeue a Cat
 	void dequeueCat() {
 		if (!catQueue.empty()) {
 			catQueue.pop();
 		}
-		else
-		{
-			printf("No More Cats!\n");
-		}
+		else { printf("No More Cats!\n"); }
 	}
 
 	// Choose the older one and pop
@@ -104,19 +101,20 @@ public:
 		if (!dogQueue.empty() && catQueue.empty()) {
 			dogQueue.pop();
 		}
+		//
 		else if (dogQueue.empty() && !catQueue.empty()) {
 			catQueue.pop();
 		}
+		// If both queues are full compare which came earlier
 		else if (!dogQueue.empty() && !catQueue.empty()) {
-			(dogQueue.peek().getOrder() < catQueue.peek().getOrder()) ? dogQueue.pop() : catQueue.pop();
+			(dogQueue.peek().getOrder() <= catQueue.peek().getOrder()) ? dogQueue.pop() : catQueue.pop();
 		}
-		else {
-			printf("Animal Shelter is Empty!\n");
-		}
+		else { printf("Animal Shelter is Empty!\n"); }
 	}
 
-	void print() {
-		printf("Animal Shelter:\nDogs:%d\nCats:%d\n", dogQueue.size() + 1, catQueue.size() + 1);
+	// Print Shelter Stats
+	void printStats() {
+		printf("===============\nAnimal Shelter:\nDogs:%d\nCats:%d\n", dogQueue.size() + 1, catQueue.size() + 1);
 	}
 };
 
@@ -134,7 +132,7 @@ public:
 //	AnimalShelter.dequeueAny();
 //	AnimalShelter.dequeueAny();
 //	AnimalShelter.dequeueAny();
-//	AnimalShelter.print();
+//	AnimalShelter.printStats();
 //	AnimalShelter.enqueue(AnimalShelter.CAT);
 //	AnimalShelter.enqueue(AnimalShelter.DOG);
 //	AnimalShelter.enqueue(AnimalShelter.DOG);
@@ -146,7 +144,7 @@ public:
 //	AnimalShelter.dequeueCat();
 //	AnimalShelter.dequeueDog();
 //	AnimalShelter.dequeueDog();
-//	AnimalShelter.print();
+//	AnimalShelter.printStats();
 //
 //	return 0;
 //}
