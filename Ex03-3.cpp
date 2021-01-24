@@ -34,7 +34,7 @@ public:
 	void push(T val) {
 		// If the vector is empty , add initial stack
 		// If there is no space , then increase capacity
-		if (mData.empty() || mData[TOP_stack]->getTOP() >= (S - 1)) {
+		if (mData.empty() || mData[TOP_stack]->size() >= (S - 1)) {
 			mData.push_back(new Stack<T, S>());
 			TOP_stack++;
 		}

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <assert.h>
+#include <time.h>
 
 /*
 	Binary Search Tree Templated Class

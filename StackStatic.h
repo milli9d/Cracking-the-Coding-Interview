@@ -44,7 +44,8 @@ public:
 			printf("Stack Empty!\n");
 		}
 	}
-	const T& peek() {
+
+	T& peek() {
 		if (TOP != -1) {
 			return mData[TOP];
 		}
@@ -53,7 +54,7 @@ public:
 		}
 	}
 
-	const T& top() {
+	T& top() {
 		if (TOP != -1) {
 			return mData[TOP];
 		}
@@ -63,8 +64,12 @@ public:
 		}
 	}
 
-	int getTOP() {
+	int size() {
 		return TOP;
+	}
+
+	bool isFull() {
+		return (TOP == S - 1) ? true : false;
 	}
 
 	bool empty() {
