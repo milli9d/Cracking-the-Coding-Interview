@@ -288,12 +288,12 @@ public:
 	ListNode* getHead() {
 		return head;
 	}
-	size_t getSize() {
+	int getSize() {
 		return size;
 	}
 
 private:
-	size_t size = -1;
+	int size = -1;
 	LinkedList<T>::ListNode* head = nullptr;
 };
 
