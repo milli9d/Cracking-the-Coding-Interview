@@ -97,10 +97,9 @@ public:
 		LinkedList<T>::ListNode* runPtr = head;
 		head = NULL;
 		while (runPtr != nullptr) {
-			ListNode* delPtr = runPtr;
-			runPtr = runPtr->next;
-			delete(delPtr);
-			delPtr = nullptr;
+			ListNode* nextPtr = runPtr->next;
+			delete(runPtr);
+			runPtr = nextPtr;
 		}
 		//printf("DELETED\n");
 	}

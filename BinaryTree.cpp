@@ -3,6 +3,9 @@
 #include <vector>
 #include <assert.h>
 
+/*
+	Binary Search Tree Templated Class
+*/
 template <typename T>
 class BSTree {
 	// Member Structures
@@ -189,22 +192,22 @@ private:
 	size_t size = 0;
 };
 
-int main() {
-	using DATA_TYPE = int;
-
-	BSTree<DATA_TYPE> test;
-	test.generateRandomInt(100, 20);
-	const BSTree<DATA_TYPE>::TreeNode* temp = test.find(2);
-	test.inOrderBST();
-	printf("\n\n");
-	test.preOrderBST();
-	printf("\n\n");
-	test.postOrderBST();
-	printf("\n\n");
-	test.breadthFirstBST();
-	printf("\n\n");
-	temp = test.minElement();
-	temp = test.maxElement();
-	int h = test.treeHeight();
-	return 0;
-}
+//int main() {
+//	using DATA_TYPE = int;
+//
+//	BSTree<DATA_TYPE> test;
+//	test.generateRandomInt(100, 20);
+//	const BSTree<DATA_TYPE>::TreeNode* temp = test.find(2);
+//	test.inOrderBST();
+//	printf("\n\n");
+//	test.preOrderBST();
+//	printf("\n\n");
+//	test.postOrderBST();
+//	printf("\n\n");
+//	test.breadthFirstBST();
+//	printf("\n\n");
+//	temp = test.minElement();
+//	temp = test.maxElement();
+//	int h = test.treeHeight();
+//	return 0;
+//}

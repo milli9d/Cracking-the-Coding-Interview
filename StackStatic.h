@@ -62,6 +62,14 @@ public:
 			printf("Stack Empty!\n");
 		}
 	}
+
+	int getTOP() {
+		return TOP;
+	}
+
+	bool empty() {
+		return (TOP == -1) ? true : false;
+	}
 };
 
 //int main() {
