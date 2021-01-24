@@ -5,8 +5,9 @@ Updated regularly with more solutions
 #### Currently Complete 
 1. Arrays
 2. Linked Lists
+3. Stacks and Queues
 5. Bit Manipulation
 
 #### In Attempt:
-3. Stacks and Queues
+4. Trees and Graphs
 8. Dynamic Programming
