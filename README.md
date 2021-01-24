@@ -3,10 +3,16 @@
 Updated regularly with more solutions
 
 #### Currently Complete 
-1. Arrays
-2. Linked Lists
-5. Bit Manipulation
+  Ch1. Arrays
+  
+  Ch2. Linked Lists
+  
+  Ch3. Stacks and Queues
+  
+  Ch5. Bit Manipulation
 
 #### In Attempt:
-3. Stacks and Queues
-8. Dynamic Programming
+  
+  Ch4. Trees and Graphs
+  
+  Ch8. Dynamic Programming
