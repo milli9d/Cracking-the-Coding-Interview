@@ -95,13 +95,13 @@ public:
 
 	~LinkedList() {
 		LinkedList<T>::ListNode* runPtr = head;
-		head = NULL;
+		this->head = NULL;
 		while (runPtr != nullptr) {
 			ListNode* nextPtr = runPtr->next;
 			delete(runPtr);
 			runPtr = nextPtr;
 		}
-		//printf("DELETED\n");
+		printf("DELETED\n");
 	}
 
 	Iterator begin() {
@@ -306,4 +306,5 @@ private:
 //	test.deleteNode(test.getNode(1));
 //	test.deleteNode(2);
 //	test.printList();
+//	return 0;
 //}
