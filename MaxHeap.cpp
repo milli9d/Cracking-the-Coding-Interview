@@ -12,7 +12,7 @@ using std::vector;
 
 // Min Heap is a BST with Minimum Element always at the root
 template<typename T>
-class MinHeap {
+class MaxHeap {
 	// Private Members
 private:
 	vector<T> mData;
@@ -29,9 +29,9 @@ private:
 
 			if (leftChildIdx >= size || rightChildIdx >= size) { return; }
 			// Get the smallest child
-			int smallChildIdx = (mData[leftChildIdx] < mData[rightChildIdx]) ? leftChildIdx : rightChildIdx;
+			int smallChildIdx = (mData[leftChildIdx] > mData[rightChildIdx]) ? leftChildIdx : rightChildIdx;
 			// Compare with current to heapfify subtree element
-			if (mData[smallChildIdx] < mData[heapifyDownIdx]) {
+			if (mData[smallChildIdx] > mData[heapifyDownIdx]) {
 				std::swap(mData[smallChildIdx], mData[heapifyDownIdx]);
 			}
 			heapifyDownIdx = smallChildIdx;
@@ -43,13 +43,13 @@ private:
 		// Get last element
 		int lastElementIdx = size() - 1;
 		// Get its parent
-		int parentIdx = (elementIdx - 1) / 2;;
-		while (parentIdx >= 0 && mData[lastElementIdx] < mData[parentIdx]) {
+		int parentIdx = (lastElementIdx - 1) / 2;
+		while (parentIdx >= 0 && mData[lastElementIdx] > mData[parentIdx]) {
 			// Swap
 			std::swap(mData[parentIdx], mData[lastElementIdx]);
 			// Walk UP
 			lastElementIdx = parentIdx;
-			parentIdx = getParentIdx(lastElementIdx);
+			parentIdx = (lastElementIdx - 1) / 2;
 		}
 	}
 
@@ -73,7 +73,7 @@ public:
 		heapifyDown();
 	}
 
-	T min() {
+	T max() {
 		if (!mData.empty) {
 			return mData[0];
 		}
@@ -123,9 +123,11 @@ public:
 	}
 };
 
-//int main() {
-//	MinHeap<int> test;
-//	test.generateRandom(10, 100);
-//	test.pollTester(5);
-//	return 0;
-//}
+int main() {
+	MaxHeap<int> test;
+	test.generateRandom(10, 100);
+	test.print();
+	printf("-------------------------------\n");
+	test.pollTester(5);
+	return 0;
+}
