@@ -13,7 +13,9 @@ using std::string;
 template<typename T>
 class LinkedList {
 public:
+
 	typedef struct ListNode {
+		//
 		T val;
 		ListNode* next;
 

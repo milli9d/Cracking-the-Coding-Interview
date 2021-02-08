@@ -1,8 +1,7 @@
 /*
 	Binary Heaps
-	1. Min-Heap
-	2. Max-Heap
-
+		1. Min-Heap
+		2. Max-Heap
 */
 
 #include <iostream>
@@ -17,21 +16,26 @@ class Heap {
 private:
 	vector<T> mData;
 	bool isMinHeap = true;
+
 	// Heapify Operations
 private:
+
+	// Heapify down
 	void heapifyDown() {
 		int heapifyDownIdx = 0;
 		int size = this->size();
-		while (heapifyDownIdx < size) {
+		int leftChildIdx = (2 * heapifyDownIdx) + 1;
+		int rightChildIdx = (2 * heapifyDownIdx) + 2;
+		while (leftChildIdx < size) {
 			// Swap element with smaller child till it's at right place
-			int leftChildIdx = (2 * heapifyDownIdx) + 1;
-			int rightChildIdx = (2 * heapifyDownIdx) + 2;
+			leftChildIdx = (2 * heapifyDownIdx) + 1;
+			rightChildIdx = (2 * heapifyDownIdx) + 2;
 
 			if (leftChildIdx >= size || rightChildIdx >= size) { return; }
 			// Get the smallest child
-			int chosenChildIdx = (isMinHeap ? (mData[leftChildIdx] < mData[rightChildIdx]) : (mData[leftChildIdx] > mData[rightChildIdx])) ? leftChildIdx : rightChildIdx;
+			int chosenChildIdx = (isMinHeap ? (mData[leftChildIdx] <= mData[rightChildIdx]) : (mData[leftChildIdx] >= mData[rightChildIdx])) ? leftChildIdx : rightChildIdx;
 			// Compare with current to heapfify subtree element
-			if (isMinHeap ? mData[chosenChildIdx] < mData[heapifyDownIdx] : mData[chosenChildIdx] > mData[heapifyDownIdx]) {
+			if (isMinHeap ? mData[chosenChildIdx] <= mData[heapifyDownIdx] : mData[chosenChildIdx] >= mData[heapifyDownIdx]) {
 				std::swap(mData[chosenChildIdx], mData[heapifyDownIdx]);
 			}
 			heapifyDownIdx = chosenChildIdx;
@@ -47,7 +51,7 @@ private:
 		while (parentIdx >= 0 && (isMinHeap ? (mData[lastElementIdx] < mData[parentIdx]) : (mData[lastElementIdx] > mData[parentIdx]))) {
 			// Swap
 			std::swap(mData[parentIdx], mData[lastElementIdx]);
-			// Walk UP
+			// Walk Up
 			lastElementIdx = parentIdx;
 			parentIdx = (lastElementIdx - 1) / 2;
 		}
@@ -79,7 +83,7 @@ public:
 	}
 
 	T peek() {
-		if (!mData.empty) {
+		if (!empty()) {
 			return mData[0];
 		}
 		else {
@@ -88,8 +92,29 @@ public:
 		}
 	}
 
-	int size() {
-		return mData.size();
+	int size() { return mData.size(); }
+
+	bool empty() { return mData.empty(); }
+
+	vector<T> heapSort(vector<T>& arr) {
+		vector<T> out;
+		for (T i : arr) {
+			insert(i);
+		}
+		while (!empty()) {
+			out.push_back(peek());
+			poll();
+		}
+		return out;
+	}
+
+	vector<T> heapSort() {
+		vector<T> out;
+		while (!empty()) {
+			out.push_back(peek());
+			poll();
+		}
+		return out;
 	}
 
 	// Miscellaneous Fuctions
@@ -118,7 +143,7 @@ public:
 	}
 
 	void pollTester(int val) {
-		if (mData.size() > val) {
+		if (mData.size() >= val) {
 			for (int i = 0; i < val; i++) {
 				poll();
 				print();
@@ -128,17 +153,12 @@ public:
 	}
 };
 
-int main() {
-	{
-		Heap<int> test(false);
-		test.generateRandom(10, 100);
-		test.pollTester(5);
-	}
-	{
-		printf("ENDENDENDENDENDEND\n");
-		Heap<int> test(true);
-		test.generateRandom(10, 100);
-		test.pollTester(5);
-	}
+int main()
+{
+	//Heap<int> test1(false);
+	Heap<int> test2(true);
+	test2.generateRandom(10, 50);
+	test2.pollTester(10);
+	vector<int> max = test2.heapSort();
 	return 0;
 }
