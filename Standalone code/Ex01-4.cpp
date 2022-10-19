@@ -36,13 +36,19 @@ public:
 	}
 };
 
-class Ex1_4 {
+class Ex1_4
+{
 public:
-	bool isPalindromePermutation(string& str) {
+
+
+	bool isPalindromePermutation(string &str) {
 		// Means that each character will have a pair , we can easily check for this
-		if (str.size() <= 1) { return false; }
+		if (str.size() <= 1) {
+			return false;
+		}
+
 		// Make ASCII tracker array
-		int tracker[UCHAR_MAX] = { 0 };
+		int tracker[UCHAR_MAX] = {0};
 
 		// Go through array and count all occurences
 		for (char ch : str) {
@@ -54,14 +60,15 @@ public:
 		int oneCount = 0;
 		// Go through tracker and find discrepancies
 		for (int i : tracker) {
-			if (oneCount > 1) { return false; }
+			if (oneCount > 1) {
+				return false;
+			}
 			// If count is 1 or not
 			if (i == 1) {
 				oneCount++;
 			}
 			// If there is a count which is odd and not 1
-			if (i > 1 && i % 2 != 0)
-			{
+			if (i > 1 && i % 2 != 0) {
 				return false;
 			}
 		}

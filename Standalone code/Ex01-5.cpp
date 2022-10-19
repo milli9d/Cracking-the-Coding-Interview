@@ -14,20 +14,24 @@ using namespace std;
 
 class Ex01_5 {
 private:
-
-	bool isOneReplacementAway(string& str1, string& str2) {
-		bool replaceCount = false;			// track if we already saw a candidiate for replacement
+	bool isOneReplacementAway(string &str1, string &str2)
+	{
+		bool replaceCount = false; // track if we already saw a candidiate for replacement
 
 		// Iterate through both screens and look for replacement candidates
 		for (int i = 0; i < str1.length(); i++) {
 			// Find a replacement index
 			if (str1[i] != str2[i]) {
 				// check if replacement candidate has already been seen and return false if seen already
-				if (replaceCount == true) { return false; }
+				if (replaceCount == true) {
+					return false;
+				}
 				replaceCount = true;
 			}
 		}
-		return true;						// Return true if no replacement or just 1 replacement
+
+		// Return true if no replacement or just 1 replacement
+		return true; 
 	}
 
 	bool isOneInsRepAway(string& str1, string& str2) {
