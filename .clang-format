@@ -37,7 +37,7 @@ BraceWrapping:
   SplitEmptyNamespace: false
 BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: BeforeColon
-ColumnLimit: 120
+ColumnLimit: 80
 CompactNamespaces: true
 Cpp11BracedListStyle: false
 FixNamespaceComments: true
