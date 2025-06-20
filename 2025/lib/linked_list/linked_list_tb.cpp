@@ -2,6 +2,8 @@
 #include <ctime>
 
 #include <linked_list.hpp>
+#include <stack.hpp>
+#include <queue.hpp>
 
 int main()
 {
@@ -54,6 +56,24 @@ int main()
     list.remove(list.size() - 1u);
 
     std::cout << list << std::endl;
+
+    std::cout << "STACK\n";
+    ctci::stack<int> stack;
+    stack.push(10u);
+    std::cout << stack << std::endl;
+    stack.push(20u);
+    std::cout << stack << std::endl;
+    stack.pop();
+    std::cout << stack << std::endl;
+
+    std::cout << "QUEUE\n";
+    ctci::queue<int> queue;
+    queue.push(10u);
+    std::cout << queue << std::endl;
+    queue.push(20u);
+    std::cout << queue << std::endl;
+    queue.pop();
+    std::cout << queue << std::endl;
 
     return 0;
 }

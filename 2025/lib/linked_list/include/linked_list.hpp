@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <iomanip>
 #include <array>
@@ -21,7 +23,7 @@ class linked_list
         }
     };
 
-  private:
+  protected:
     std::shared_ptr<node_t> _head{ nullptr };
     std::shared_ptr<node_t> _tail{ nullptr };
     size_t sz{ 0u };
