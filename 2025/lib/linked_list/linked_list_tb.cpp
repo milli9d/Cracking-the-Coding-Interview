@@ -1,34 +1,59 @@
 #include <iostream>
 #include <ctime>
 
-#include <ring_buffer.hpp>
+#include <linked_list.hpp>
 
 int main()
 {
-    printf("Ring Buffer Testbench\n");
-    ctci::ring_buf<int, 5> rb{};
+    printf("Linked List Testbench\n");
+    ctci::linked_list<int> list{};
     srand(time(0));
-
-    for (size_t i = 0u; i < 5u; i++) {
-        rb.push((int)i);
+    for (int i = 0; i < 10; i++) {
+        int val = rand() % 100;
+        list.push_front(val);
+        std::cout << list << std::endl;
+        printf("Push front %2d sz : %zu\n", val, list.size());
     }
 
-    std::cout << rb << std::endl;
-
-    for (size_t i = 0u; i < 3u; i++) {
-        int out = 0;
-        rb.pop(out);
+    for (int i = 0; i < 10; i++) {
+        int val = rand() % 100;
+        list.push_back(val);
+        std::cout << list << std::endl;
+        printf("Push back  %2d sz : %zu\n", val, list.size());
     }
 
-    std::cout << rb << std::endl;
+    std::cout << list << std::endl;
+    list.reverse();
+    std::cout << "Reversed\n" << list << "\n\n\n";
 
-    rb.clear();
-
-    for (size_t i = 0u; i < 5u; i++) {
-        rb.push((int)i * 50);
+    for (int i = 0; i < 10; i++) {
+        int val = list.front();
+        list.pop_front();
+        std::cout << list << std::endl;
+        printf("Pop front %d sz : %zu\n", val, list.size());
     }
 
-    std::cout << rb << std::endl;
+    for (int i = 0; i < 10; i++) {
+        int val = list.back();
+        list.pop_back();
+        std::cout << list << std::endl;
+        printf("Pop back  %d sz : %zu\n", val, list.size());
+    }
+
+    std::cout << list << std::endl;
+    list.insert(1, 200);
+    list.insert(0, 100);
+    for (int i = 0; i < 10; i++) {
+        list.insert(1, i);
+    }
+
+    std::cout << list << std::endl;
+
+    list.remove(0u);
+    list.remove(list.size() / 2u);
+    list.remove(list.size() - 1u);
+
+    std::cout << list << std::endl;
 
     return 0;
 }

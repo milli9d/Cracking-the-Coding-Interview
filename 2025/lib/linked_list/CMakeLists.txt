@@ -1,16 +1,16 @@
-add_library(ring_buffer INTERFACE)
+add_library(linked_list INTERFACE)
 
-target_include_directories(ring_buffer INTERFACE
+target_include_directories(linked_list INTERFACE
     ${CMAKE_CURRENT_LIST_DIR}/include
 )
 
-add_library(CTCI::ring_buffer ALIAS ring_buffer)
+add_library(CTCI::linked_list ALIAS linked_list)
 
 # Add the source files to the library
-add_executable(ring_buffer_tb
-    ${CMAKE_CURRENT_LIST_DIR}/ring_buffer_tb.cpp
+add_executable(linked_list_tb
+    ${CMAKE_CURRENT_LIST_DIR}/linked_list_tb.cpp
 )
 
-target_link_libraries(ring_buffer_tb
-    PRIVATE CTCI::ring_buffer
+target_link_libraries(linked_list_tb
+    PRIVATE CTCI::linked_list
 )
